@@ -242,6 +242,9 @@ bindsym $mod+Shift+Ctrl+9 move container to workspace $ws19
 
 bindsym $mod+Shift+grave move container to workspace $ws20
 
+# set window transparency
+bindsym $mod+k exec transset -a
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
