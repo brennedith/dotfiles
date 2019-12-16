@@ -17,4 +17,7 @@ code --install-extension streetsidesoftware.code-spell-checker-spanish
 code --install-extension syler.sass-indented
 code --install-extension WallabyJs.quokka-vscode
 code --install-extension wesbos.theme-cobalt2
+code --install-extension PKief.material-icon-theme
+code --install-extension Angular.ng-template
+code --install-extension nrwl.angular-console
 code --install-extension wix.vscode-import-cost
