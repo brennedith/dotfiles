@@ -14,7 +14,7 @@ set $i3xrocks_config .config/regolith/i3/i3xrocks.conf
 set $compton_config /etc/regolith/compton/config
 
 # path to terminal. Override this to specify a custom terminal.
-set $terminal_path st -f "Liberation Mono:pixelsize=28:antialias=true:autohint=true"
+set $terminal_path st -f "Liberation Mono:pixelsize=24:antialias=true:autohint=true"
 
 # path to browser
 set $browser_path /bin/firefox
