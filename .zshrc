@@ -128,7 +128,7 @@ alias gst="git status"
 alias gbh="git branch"
 alias gpull="git pull"
 #gcb() {
-#	git checkout -b $1
+#    git checkout -b $1
 #}
 gpush() {
     git push
@@ -144,6 +144,12 @@ gdev() {
     git checkout develop
     if [ $? -ne 0 ]; then
         git checkout dev
+    fi
+}
+grebase() {
+    git rebase develop
+    if [ $? -ne 0 ]; then
+        git rebase dev
     fi
 }
 gac() {
