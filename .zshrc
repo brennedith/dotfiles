@@ -169,6 +169,9 @@ gfire() {
 	git commit -F ./COMMIT_MSG $*
 	rm ./COMMIT_MSG
 }
+glines(){
+	git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
+}
 
 # NPM
 alias rnpm="rm -fr node_modules; npm install"
