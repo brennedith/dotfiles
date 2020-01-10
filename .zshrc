@@ -124,8 +124,8 @@ alias e=exit
 
 # Git
 alias g-="git checkout -"
-alias gst="git status"
-alias gbh="git branch"
+alias gstatus="git status"
+alias gbranch="git branch"
 alias gpull="git pull"
 #gcb() {
 #    git checkout -b $1
