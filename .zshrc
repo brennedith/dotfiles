@@ -126,6 +126,8 @@ alias e=exit
 alias g-="git checkout -"
 alias gstatus="git status"
 alias gbranch="git branch"
+alias gspush="git stash"
+alias gspop="git stash pop"
 alias gpull="git pull"
 #gcb() {
 #    git checkout -b $1
@@ -172,6 +174,7 @@ gfire() {
 glines(){
 	git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
 }
+
 
 # NPM
 alias rnpm="rm -fr node_modules; npm install"
