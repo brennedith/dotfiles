@@ -174,6 +174,9 @@ gfire() {
 glines(){
 	git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
 }
+gcommits(){
+	git shortlog -s -n --all --no-merges
+}
 
 
 # NPM
