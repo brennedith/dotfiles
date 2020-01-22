@@ -119,6 +119,9 @@ alias shu="micro ~/.zshrc;source ~/.zshrc"
 eval $(thefuck --alias)
 alias f=fuck
 
+# Kill user
+alias killme="pkill -KILL -u $(whoami)"
+
 # Exit
 alias e=exit
 
@@ -129,6 +132,8 @@ alias gbranch="git branch"
 alias gspush="git stash"
 alias gspop="git stash pop"
 alias gpull="git pull"
+alias gundo="git reset HEAD~1"
+alias greset="git reset --hard"
 #gcb() {
 #    git checkout -b $1
 #}
