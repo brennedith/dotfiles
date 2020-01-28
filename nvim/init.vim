@@ -16,6 +16,8 @@ Plug 'ryanoasis/vim-devicons'
 "" File fuzzy search
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+"" Git Blame
+Plug 'APZelos/blamer.nvim'
 
 call plug#end()
 
@@ -121,3 +123,7 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+"" Git Blame
+let g:blamer_enabled = 1
+let g:blamer_delay = 500
