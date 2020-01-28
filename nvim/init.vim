@@ -21,6 +21,22 @@ call plug#end()
 
 """ Configuration
 
+"" Misc
+set showmatch
+set number
+set formatoptions+=o
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set updatetime=300
+set cmdheight=2
+set signcolumn=yes
+set shortmess+=c
+
 "" Theme
 if (has("termguicolors"))
  set termguicolors
@@ -45,6 +61,17 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+command! -nargs=0 Format :call CocAction('format')
 "" File Explorer
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
