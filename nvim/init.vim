@@ -1,6 +1,9 @@
 """ Plugins
 
 call plug#begin()
+"" Plugin manager
+" curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+"   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 "" Theme
 Plug 'dracula/vim'
@@ -24,6 +27,7 @@ call plug#end()
 """ Configuration
 
 "" Misc
+set encoding=UTF-8
 set showmatch
 set number
 set formatoptions+=o
@@ -94,6 +98,12 @@ let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+
+" Linux
+" set guifont=DroidSansMono\ Nerd\ Font\ 11
+" MacOSX
+" set guifont=DroidSansMono\ Nerd\ Font:h11
+" set guifont=DroidSansMono_Nerd_Font:h11
 
 "" File fuzzy search
 nnoremap <C-p> :GFiles<CR>
