@@ -68,7 +68,17 @@ syntax enable
 colorscheme dracula
 
 "" IntelliSense
-let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+let g:coc_global_extensions = [
+      \ 'coc-emmet',
+      \ 'coc-css',
+      \ 'coc-html',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-tsserver',
+      \ 'coc-pairs',
+      \ 'coc-snippets',
+      \ 'coc-eslint'
+      \ ]
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
