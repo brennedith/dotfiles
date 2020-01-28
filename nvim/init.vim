@@ -37,6 +37,19 @@ set cmdheight=2
 set signcolumn=yes
 set shortmess+=c
 
+" Relative numbering
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set nornu
+    set number
+  else
+    set rnu
+  endif
+endfunc
+
+" Toggle between normal and relative numbering.
+nnoremap <C-r> :call NumberToggle()<CR>
+
 "" Theme
 if (has("termguicolors"))
  set termguicolors
