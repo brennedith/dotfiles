@@ -112,8 +112,11 @@ export TERM=xterm
 #fi
 ###-tns-completion-end-###
 
-#Zsh
+# Zsh
 alias shu="micro ~/.zshrc;source ~/.zshrc"
+
+# External IP
+alias myip="curl http://ipecho.net/plain; echo"
 
 # TheFuck 
 eval $(thefuck --alias)
