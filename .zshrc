@@ -137,6 +137,7 @@ alias gspop="git stash pop"
 alias gpull="git pull"
 alias gundo="git reset HEAD~1"
 alias greset="git reset --hard"
+alias gmaster="git checkout master"
 #gcb() {
 #    git checkout -b $1
 #}
@@ -199,3 +200,7 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
