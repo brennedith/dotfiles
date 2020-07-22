@@ -112,6 +112,9 @@ export TERM=xterm
 #fi
 ###-tns-completion-end-###
 
+# A better cat
+alias bat=batcat
+
 # Zsh
 alias shu="micro ~/.zshrc;source ~/.zshrc"
 
