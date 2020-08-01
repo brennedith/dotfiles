@@ -174,6 +174,10 @@ gac() {
         git commit -m "Minor fixes"
     fi
 }
+grifle(){
+	echo COMMIT_MSG > ~/.gitignore
+	git config --global core.excludesfile '~/.gitignore'
+}
 gaim() {
 	echo "\n\n# This commit will..." > ./COMMIT_MSG
 	micro ./COMMIT_MSG
