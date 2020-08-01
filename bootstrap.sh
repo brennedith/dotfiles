@@ -33,3 +33,7 @@ ln $CURRENT_PATH/zprofile ~/.zprofile
 # Install and configure node
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 nvm install $NODE_VERSION
+
+# Install and configure Neovim
+sudo apt install neovim
+ln -s $CURRENT_PATH/nvim ~/.config/nvim
