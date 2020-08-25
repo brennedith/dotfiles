@@ -134,7 +134,8 @@ alias e=exit
 # Git
 alias g-="git checkout -"
 alias gstatus="git status"
-alias gbranch="git branch"
+alias gbranch="git branch | cat"
+alias gslist="git stash list"
 alias gspush="git stash"
 alias gspop="git stash pop"
 alias gpull="git pull"
