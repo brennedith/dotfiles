@@ -115,11 +115,8 @@ export PATH="$DVM_DIR/bin:$PATH"
 #fi
 ###-tns-completion-end-###
 
-# A better cat
-alias bat=batcat
-
 # Zsh
-alias shu="micro ~/.zshrc;source ~/.zshrc"
+alias shu="nano ~/.zshrc;source ~/.zshrc"
 
 # External IP
 alias myip="curl http://ipecho.net/plain; echo"
