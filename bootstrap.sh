@@ -5,9 +5,8 @@
 GIT_USER_NAME="Brennedith Garcia"
 GIT_USER_EMAIL="brennedith@pm.me"
 
-NODE_VERSION="12"
-
-CURRENT_PATH=`pwd`
+NODE_VERSION="12.18.4"
+DENO_VERSION="1.4.4"
 
 # Update system packages
 sudo apt update
@@ -27,13 +26,24 @@ sudo pip3 install thefuck
 # Install and configure zsh and OhMyZsh
 sudo apt install zsh curl
 curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash
-ln $CURRENT_PATH/zshrc ~/.zshrc
-ln $CURRENT_PATH/zprofile ~/.zprofile
+rm ~/.zshrc
+ln $PWD/zshrc ~/.zshrc
 
-# Install and configure node
+# Install and configure node+deno
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
 nvm install $NODE_VERSION
 
+curl -fsSL https://deno.land/x/dvm/install.sh | bash
+dvm install $DENO_VERSION
+
 # Install and configure Neovim
 sudo apt install neovim
-ln -s $CURRENT_PATH/nvim ~/.config/nvim
+ln -s $PWD/nvim ~/.config/nvim
+
+# Install and configure touchegg
+# TODO: Install touchegg
+ln -s $PWD/touchegg ~/.config/touchegg
+
+# Install and configure batcat
+# TODO: Install batcat
+# TODO: Configure batcat

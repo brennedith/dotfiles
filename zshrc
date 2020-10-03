@@ -104,7 +104,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_com$
 
-export TERM=xterm
+export DENO_INSTALL="/home/brennedith/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+export DVM_DIR="/home/brennedith/.dvm"
+export PATH="$DVM_DIR/bin:$PATH"
 
 ###-tns-completion-start-###
 # if [ -f /home/brennedith/.tnsrc ]; then 
@@ -200,7 +203,7 @@ gcommits(){
 alias rnpm="rm -fr node_modules; npm install"
 
 # NeoVim
-alias vim="nvim"
+alias vim="vim"
 
 # Android
 export ANDROID_HOME=$HOME/Android/Sdk
