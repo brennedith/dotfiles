@@ -104,11 +104,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_com$
 
-export DENO_INSTALL="/home/brennedith/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-export DVM_DIR="/home/brennedith/.dvm"
-export PATH="$DVM_DIR/bin:$PATH"
-
 ###-tns-completion-start-###
 # if [ -f /home/brennedith/.tnsrc ]; then 
 #    source /home/brennedith/.tnsrc 
@@ -121,10 +116,6 @@ alias shu="nano ~/.zshrc;source ~/.zshrc"
 # External IP
 alias myip="curl http://ipecho.net/plain; echo"
 
-# TheFuck 
-eval $(thefuck --alias)
-alias f=fuck
-
 # Kill user
 alias killme="pkill -KILL -u $(whoami)"
 
@@ -133,66 +124,68 @@ alias e=exit
 
 # Git
 alias g-="git checkout -"
-alias gstatus="git status"
+alias gstat="git status"
 alias gbranch="git branch | cat"
 alias gslist="git stash list"
-alias gspush="git stash"
+alias gspush="git stash push -u -m"
 alias gspop="git stash pop"
-alias gpull="git pull"
 alias gundo="git reset HEAD~1"
 alias greset="git reset --hard"
+alias gcb="git checkout -b"
 alias gmaster="git checkout master"
-#gcb() {
-#    git checkout -b $1
-#}
+alias gqa="git checkout qa"
+alias gdev="git checkout dev"
+alias ga="git add"
+alias ga.="git add ."
+alias gcm="git commit -m"
 gpush() {
-    git push
-    if [ $? -ne 0 ]; then
-        f
-    fi
+  git push
+  if [ $? -eq 128 ]; then
+    git push -u origin $(git rev-parse --abbrev-ref HEAD)
+  fi
+}
+gpull() {
+  git pull
+  if [ $? -ne 0]; then
+    fit pull -u origin $(git rev-parse --abbrev-ref HEAD)
+  fi
 }
 gprune() {
-	git remote prune origin
-	git branch --merged | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -d
-}
-gdev() {
-    git checkout develop
-    if [ $? -ne 0 ]; then
-        git checkout dev
-    fi
+  git remote prune origin
+  git branch --merged | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -d
 }
 grebase() {
-    git rebase develop
-    if [ $? -ne 0 ]; then
-        git rebase dev
-    fi
+  git rebase develop
+  if [ $? -ne 0 ]; then
+    git rebase dev
+  fi
 }
 gac() {
-    git add .
-    if [ "$1" -ne "" ]; then
-        git commit -m "$1"
-    else
-        git commit -m "Minor fixes"
-    fi
+  git add .
+  if [ "$1" -ne "" ]; then
+    git commit -m "$1"
+  else
+    git commit -m "fix: minor improvements"
+  fi
 }
 grifle(){
-	echo COMMIT_MSG > ~/.gitignore
-	git config --global core.excludesfile '~/.gitignore'
+  echo COMMIT_MSG > ~/.gitignore
+  git config --global core.excludesfile '~/.gitignore'
 }
 gaim() {
-	echo "\n\n# This commit will..." > ./COMMIT_MSG
-	micro ./COMMIT_MSG
+  echo "\n\n# This commit will..." > ./COMMIT_MSG
+  vim ./COMMIT_MSG
 }
 gfire() {
-	micro ./COMMIT_MSG
-	git commit -F ./COMMIT_MSG $*
-	rm ./COMMIT_MSG
+  vim ./COMMIT_MSG
+  git commit -F ./COMMIT_MSG $*
+  rm ./COMMIT_MSG
 }
 glines(){
-	git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
+  git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
 }
 gcommits(){
-	git shortlog -s -n --all --no-merges
+  git shortlog -s -n --all --no-merges
 }
 
 
@@ -202,13 +195,3 @@ alias rnpm="rm -fr node_modules; npm install"
 # NeoVim
 alias vim="vim"
 
-# Android
-export ANDROID_HOME=$HOME/Android/Sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
