@@ -133,15 +133,16 @@ alias gundo="git reset HEAD~1"
 alias greset="git reset --hard"
 alias gcb="git checkout -b"
 alias gmaster="git checkout master"
+alias gmain="git checkout main"
 alias gqa="git checkout qa"
 alias gdev="git checkout dev"
 alias ga="git add"
 alias ga.="git add ."
 alias gcm="git commit -m"
 gpush() {
-  git push
+  git push --no-verify
   if [ $? -eq 128 ]; then
-    git push -u origin $(git rev-parse --abbrev-ref HEAD)
+    git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify
   fi
 }
 gpull() {
