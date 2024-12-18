@@ -98,21 +98,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-#NVM
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_com$
-
-###-tns-completion-start-###
-# if [ -f /home/brennedith/.tnsrc ]; then 
-#    source /home/brennedith/.tnsrc 
-#fi
-###-tns-completion-end-###
-
-# Zsh
-alias shu="nano ~/.zshrc;source ~/.zshrc"
-
 # External IP
 alias myip="curl http://ipecho.net/plain; echo"
 
@@ -124,44 +109,58 @@ alias e=exit
 
 # Git
 alias g-="git checkout -"
-alias gstat="git status"
+alias gs="git status"
 alias gbranch="git branch | cat"
 alias gslist="git stash list"
 alias gspush="git stash push -u -m"
 alias gspop="git stash pop"
 alias gundo="git reset HEAD~1"
-alias greset="git reset --hard"
+alias gdiscard="git reset --hard"
 alias gcb="git checkout -b"
-alias gmaster="git checkout master"
-alias gmain="git checkout main"
-alias gqa="git checkout qa"
-alias gdev="git checkout dev"
 alias ga="git add"
-alias ga.="git add ."
 alias gcm="git commit -m"
-gpush() {
+
+function gmain() {
+  git checkout main
+  if [ $? -ne 0 ]; then
+    git checkout master
+  fi
+}
+function gdev() {
+  git checkout staging
+  if [ $? -ne 0 ]; then
+    git checkout development
+  fi
+}
+function gpush() {
   git push --no-verify
   if [ $? -eq 128 ]; then
     git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify
   fi
 }
-gpull() {
+function gpull() {
   git pull
   if [ $? -ne 0]; then
     fit pull -u origin $(git rev-parse --abbrev-ref HEAD)
   fi
 }
-gprune() {
+function gprune() {
   git remote prune origin
   git branch --merged | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -d
 }
-grebase() {
-  git rebase develop
+function gpurge() {
+  gbranch | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -d
+}
+function grebase() {
+  git rebase main
   if [ $? -ne 0 ]; then
-    git rebase dev
+    git rebase master
+    if [ $? -ne 0 ]; then
+      git rebase staging
+    fi
   fi
 }
-gac() {
+function gac() {
   git add .
   if [ "$1" -ne "" ]; then
     git commit -m "$1"
@@ -169,30 +168,37 @@ gac() {
     git commit -m "fix: minor improvements"
   fi
 }
-grifle(){
+function grifle(){
   echo COMMIT_MSG > ~/.gitignore
   git config --global core.excludesfile '~/.gitignore'
 }
-gaim() {
+function gaim() {
   echo "\n\n# This commit will..." > ./COMMIT_MSG
   vim ./COMMIT_MSG
 }
-gfire() {
+function gfire() {
   vim ./COMMIT_MSG
   git commit -F ./COMMIT_MSG $*
   rm ./COMMIT_MSG
 }
-glines(){
+function glines(){
   git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
 }
-gcommits(){
+function gcommits(){
   git shortlog -s -n --all --no-merges
 }
 
 
 # NPM
-alias rnpm="rm -fr node_modules; npm install"
-
-# NeoVim
-alias vim="vim"
-
+function npmi() {
+  if [ -f "package-lock.json" ]; then
+    npm install
+  elif [ -f "yarn.lock" ]; then
+    yarn install
+  elif [ -f "pnpm-lock.yaml" ]; then
+    pnpm install
+  else
+    npm install
+  fi
+}
+alias rnpm="rm -fr node_modules; npmi"
