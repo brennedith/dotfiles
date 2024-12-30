@@ -149,7 +149,7 @@ function gprune() {
   git branch --merged | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -d
 }
 function gpurge() {
-  gbranch | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -d
+  gbranch | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -D
 }
 function grebase() {
   git rebase main
