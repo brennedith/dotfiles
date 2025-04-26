@@ -98,6 +98,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+alias rmrf="rm -rf"
+
 # External IP
 alias myip="curl http://ipecho.net/plain; echo"
 
@@ -112,6 +114,7 @@ alias g-="git checkout -"
 alias gs="git status"
 alias gbranch="git branch | cat"
 alias gslist="git stash list"
+alias gstemp="git stash push -u -m $(git branch --show-current)-$(date -u "+%Y-%m-%dT%H:%M:%SZ")"
 alias gspush="git stash push -u -m"
 alias gspop="git stash pop"
 alias gundo="git reset HEAD~1"
@@ -138,6 +141,12 @@ function gpush() {
     git push -u origin $(git rev-parse --abbrev-ref HEAD) --no-verify
   fi
 }
+function gpushf() {
+  git push -f --no-verify
+  if [ $? -eq 128 ]; then
+    git push -u origin $(git rev-parse --abbrev-ref HEAD) -f --no-verify
+  fi
+}
 function gpull() {
   git pull
   if [ $? -ne 0]; then
@@ -152,6 +161,7 @@ function gpurge() {
   gbranch | grep  -v '\*\|master\|develop' | xargs -n 1 git branch -D
 }
 function grebase() {
+  git fetch origin
   git rebase main
   if [ $? -ne 0 ]; then
     git rebase master
@@ -167,19 +177,6 @@ function gac() {
   else
     git commit -m "fix: minor improvements"
   fi
-}
-function grifle(){
-  echo COMMIT_MSG > ~/.gitignore
-  git config --global core.excludesfile '~/.gitignore'
-}
-function gaim() {
-  echo "\n\n# This commit will..." > ./COMMIT_MSG
-  vim ./COMMIT_MSG
-}
-function gfire() {
-  vim ./COMMIT_MSG
-  git commit -F ./COMMIT_MSG $*
-  rm ./COMMIT_MSG
 }
 function glines(){
   git ls-files | while read f; do git blame -w --line-porcelain -- "$f" | grep -I '^author '; done | sort -f | uniq -ic | sort -n
